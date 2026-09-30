@@ -4,3 +4,4 @@ __pycache__/
 *.db
 agent_books/
 demo_agent_books/
+.pytest_cache/
