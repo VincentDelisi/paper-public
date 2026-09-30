@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shadow Book</title>
+<link rel="icon" href="/static/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/styles.css">
+<script src="/static/lightweight-charts.js"></script>
+<script src="https://s3.tradingview.com/tv.js" async onload="window.__tvReady && window.__tvReady()"></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#/" aria-label="Shadow Book home">
+    <svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><rect x="9" y="9" width="17" height="19" rx="3" fill="currentColor" opacity=".35"/><rect x="5" y="4" width="17" height="19" rx="3" fill="currentColor"/><path d="M9.5 10h8M9.5 14h8M9.5 18h5" stroke="#0b0f14" stroke-width="2" stroke-linecap="round"/></svg>
+    Shadow Book <span class="badge paper">PAPER</span><span id="demoBadge" class="badge demo" hidden>DEMO DATA</span></a>
+  <div class="search">
+    <input id="search" type="text" placeholder="Search ticker (e.g. QQQ, AAPL)" autocomplete="off" spellcheck="false">
+    <ul id="searchResults" class="dropdown" hidden></ul>
+  </div>
+  <nav class="mainnav" id="mainnav"><a href="#/" data-v="home" class="on">Portfolio</a><a href="#/trade" data-v="trade">Trade</a><a href="#/agents" data-v="agents">Agents</a></nav>
+  <div class="acct-strip">
+    <div><label>Equity</label><b id="hEquity">–</b></div>
+    <div><label>Day P&amp;L</label><b id="hDay">–</b></div>
+    <div><label>Buying power</label><b id="hBP">–</b></div>
+    <div><span id="mktPill" class="pill">–</span></div>
+  </div>
+</header>
+<div class="mstrip mono" id="mstrip"></div>
+
+<main class="home" id="viewHome">
+  <section class="home-main">
+    <div class="hero">
+      <div class="hero-top">
+        <div>
+          <div class="hero-val mono" id="hVal">–</div>
+          <div class="hero-chg mono" id="hChg"></div>
+        </div>
+        <span class="spacer"></span>
+        <div class="hero-bp"><label>Buying power</label><b class="mono" id="hBP2">–</b></div>
+      </div>
+      <div id="homeChart"></div>
+      <div class="ranges" id="homeRanges">
+        <button data-r="1D" class="on">1D</button><button data-r="1W">1W</button><button data-r="1M">1M</button>
+        <button data-r="3M">3M</button><button data-r="YTD">YTD</button><button data-r="ALL">All</button>
+        <span class="spacer"></span><span class="muted small" id="homeChartNote"></span>
+      </div>
+    </div>
+
+    <div class="pf-head"><h2>Portfolio</h2><span class="spacer"></span>
+      <div class="chips" id="pfChips"><button data-f="all" class="on">All</button><button data-f="options">Options</button><button data-f="equities">Equities</button></div>
+    </div>
+    <div class="card pf-card"><div class="table-wrap">
+      <table class="pf mono" id="pfTbl">
+        <thead><tr><th class="l">Name</th><th>Price</th><th>Holdings</th><th>Cost</th><th>1D return</th><th>Unrealized return</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div></div>
+  </section>
+
+  <aside class="home-side">
+    <div class="card watch">
+      <div class="watch-head"><h3>Watchlist</h3><span class="spacer"></span><button class="btn xs ghost" id="wEdit">Edit</button></div>
+      <form id="wAdd" class="w-add" hidden><input id="wAddIn" placeholder="Add ticker" autocomplete="off" spellcheck="false"><button class="btn xs">Add</button></form>
+      <ul class="wlist" id="wList"></ul>
+    </div>
+    <div class="card">
+      <h3>Recent activity</h3>
+      <ul class="activity" id="actList"></ul>
+    </div>
+  </aside>
+</main>
+
+<main class="agents-view" id="viewAgents" hidden>
+  <section class="ag-main">
+    <div class="ag-head">
+      <div>
+        <h2>Agents</h2>
+        <p class="muted ag-sub">Sample bots, each trading its own <b>$25,000</b> paper book through the same order engine you use:
+          market orders, brackets, multi-leg limits, order walking. They exist to show execution, not to make money.</p>
+      </div>
+      <span class="spacer"></span>
+      <div class="ag-all"><button class="btn sm primary" id="agStartAll">Start all</button><button class="btn sm" id="agStopAll">Pause all</button></div>
+    </div>
+    <div class="ag-grid" id="agGrid"></div>
+    <div class="card ag-detail" id="agDetail" hidden></div>
+  </section>
+  <aside class="ag-side">
+    <div class="card ag-feed-card">
+      <div class="watch-head"><h3>Live feed</h3><span class="spacer"></span><span class="live-dot" id="agLive"></span></div>
+      <ul class="ag-feed" id="agFeed"></ul>
+    </div>
+  </aside>
+</main>
+
+<main class="layout" id="viewTrade" hidden>
+  <section class="left">
+    <div class="card quote">
+      <div class="quote-head">
+        <div>
+          <div class="sym" id="qSym">–</div>
+          <div class="name" id="qName"></div>
+        </div>
+        <div class="px">
+          <div class="last mono" id="qLast">–</div>
+          <div class="chg mono" id="qChg"></div>
+        </div>
+      </div>
+      <div class="quote-row mono">
+        <span>Bid <b id="qBid">–</b></span><span>Ask <b id="qAsk">–</b></span>
+        <span>Spread <b id="qSpr">–</b></span>
+        <span class="spacer"></span>
+        <button class="btn sm" id="tradeStock">Trade shares</button>
+      </div>
+      <div class="chart-bar">
+        <div class="ranges" id="ranges" hidden>
+          <button data-p="DAY" class="on">1D</button><button data-p="WEEK">1W</button>
+          <button data-p="MONTH">1M</button><button data-p="YEAR">1Y</button>
+        </div>
+        <span class="spacer"></span>
+        <div class="seg mini" id="chartSrc"><button data-v="tv" class="on">TradingView</button><button data-v="basic">Basic</button></div>
+      </div>
+      <div id="tvchart"></div>
+      <div id="chart" hidden></div>
+    </div>
+
+    <div class="card">
+      <nav class="tabs" id="tabs">
+        <button data-t="chain" class="on">Options chain</button>
+        <button data-t="strategies">Strategies</button>
+        <button data-t="positions">Positions <span id="nPos" class="count"></span></button>
+        <button data-t="orders">Orders <span id="nOrd" class="count"></span></button>
+        <button data-t="fills">History</button>
+        <button data-t="analytics">Analytics</button>
+      </nav>
+
+      <div class="tab" id="tab-chain">
+        <div class="chain-bar">
+          <label>Expiration <select id="expSel"></select></label>
+          <label>Strikes <select id="strikeSel"><option>6</option><option selected>10</option><option>15</option><option>25</option></select></label>
+          <span class="muted" id="chainInfo"></span>
+          <span class="stale-tag" id="chainStale" hidden>delayed · retrying</span>
+          <span class="spacer"></span>
+          <span class="legend"><i class="itm-swatch"></i>In the money</span>
+          <span class="muted small">Click a bid to sell, an ask to buy</span>
+        </div>
+        <div class="table-wrap">
+          <table class="chain mono" id="chainTbl">
+            <thead>
+              <tr class="side-head"><th colspan="9">CALLS</th><th></th><th colspan="9">PUTS</th></tr>
+              <tr>
+                <th>Delta</th><th>Gamma</th><th>Theta</th><th>Vega</th><th>IV</th><th>Open int.</th><th>Volume</th><th>Bid</th><th>Ask</th>
+                <th class="strike">Strike</th>
+                <th>Bid</th><th>Ask</th><th>Volume</th><th>Open int.</th><th>IV</th><th>Delta</th><th>Gamma</th><th>Theta</th><th>Vega</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab" id="tab-strategies" hidden>
+        <div id="stratGrid"></div>
+        <div id="builder" hidden>
+          <div class="builder-head">
+            <button class="btn sm ghost" id="bBack">← All strategies</button>
+            <div><div class="b-title" id="bTitle"></div><div class="b-bias" id="bBias"></div></div>
+            <span class="spacer"></span>
+            <label>Expiration <select id="bExp"></select></label>
+            <label>Qty <input id="bQty" type="number" min="1" step="1" value="1" class="qty-in"></label>
+          </div>
+          <div class="builder-body">
+            <div class="b-left">
+              <table class="grid mono" id="bLegs">
+                <thead><tr><th>Action</th><th class="r">Qty</th><th>Contract</th><th>Strike</th><th class="r">Bid</th><th class="r">Ask</th><th class="r">Delta</th></tr></thead>
+                <tbody></tbody>
+              </table>
+              <div class="b-stats" id="bStats"></div>
+              <div class="payoff-wrap">
+                <div class="payoff-title">Profit / loss at expiration <span class="muted small" id="bPayNote"></span></div>
+                <svg id="payoff" role="img" aria-label="Payoff at expiration"></svg>
+                <div class="payoff-tip mono" id="payTip" hidden></div>
+              </div>
+            </div>
+            <div class="b-right">
+              <div class="seg" id="bType"><button data-v="LIMIT" class="on">Limit</button><button data-v="MARKET">Market</button></div>
+              <label class="field"><span id="bNetLabel">Net debit</span> <span class="muted">per share</span>
+                <input id="bNet" type="number" min="0" step="0.01"></label>
+              <div class="muted small" id="bNetHint"></div>
+              <label class="field">Time in force
+                <select id="bTif"><option value="DAY">Day</option><option value="GTC">Good 'til cancelled</option></select></label>
+              <div class="est mono"><span id="bTotLabel">Total cost</span><b id="bTot">–</b></div>
+              <button class="btn primary block" id="bReview">Review strategy</button>
+              <div class="confirm" id="bConfirm" hidden>
+                <div id="bSummary"></div>
+                <div class="row"><button class="btn" id="bEdit">Edit</button><button class="btn primary" id="bSubmit">Place paper order</button></div>
+              </div>
+              <div class="msg" id="bMsg" hidden></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab" id="tab-positions" hidden>
+        <div class="table-wrap"><table class="grid mono" id="posTbl">
+          <thead><tr><th>Instrument</th><th class="r">Qty</th><th class="r">Avg cost</th><th class="r">Mark</th><th class="r">Market value</th><th class="r">Unrealized P&amp;L</th><th></th></tr></thead>
+          <tbody></tbody></table></div>
+      </div>
+      <div class="tab" id="tab-orders" hidden>
+        <div class="table-wrap"><table class="grid mono" id="ordTbl">
+          <thead><tr><th>Time</th><th>Instrument</th><th>Side</th><th class="r">Qty</th><th>Type</th><th class="r">Limit</th><th>Status</th><th class="r">Fill</th><th>Note</th><th></th></tr></thead>
+          <tbody></tbody></table></div>
+      </div>
+      <div class="tab" id="tab-analytics" hidden>
+        <div class="tiles" id="aTiles"></div>
+        <div class="a-grid">
+          <div><div class="payoff-title">Account value</div><div id="eqChart"></div></div>
+          <div><div class="payoff-title">Realized P&amp;L by ticker</div>
+            <table class="grid mono" id="aByTbl"><thead><tr><th>Ticker</th><th class="r">Trades</th><th class="r">Win rate</th><th class="r">Realized</th></tr></thead><tbody></tbody></table></div>
+        </div>
+      </div>
+
+      <div class="tab" id="tab-fills" hidden>
+        <div class="table-wrap"><table class="grid mono" id="fillTbl">
+          <thead><tr><th>Time</th><th>Instrument</th><th>Side</th><th class="r">Qty</th><th class="r">Price</th><th class="r">Realized P&amp;L</th></tr></thead>
+          <tbody></tbody></table></div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="right">
+    <div class="card ticket">
+      <h3>Order ticket</h3>
+      <div class="instrument" id="tInstr">–</div>
+      <div class="tquote mono" id="tQuote"></div>
+      <div class="seg" id="tSide"><button data-v="BUY" class="on buy">Buy</button><button data-v="SELL" class="sell">Sell</button></div>
+      <div class="seg four" id="tType"><button data-v="MARKET" class="on">Market</button><button data-v="LIMIT">Limit</button><button data-v="STOP">Stop</button><button data-v="STOP_LIMIT">Stop limit</button></div>
+      <label class="field">Quantity <span class="muted" id="tQtyUnit">shares</span>
+        <input id="tQty" type="number" min="1" step="1" value="1"></label>
+      <label class="field" id="tStopWrap" hidden>Stop price <span class="muted" id="tStopHint"></span>
+        <input id="tStop" type="number" min="0" step="0.01"></label>
+      <label class="field" id="tLimitWrap" hidden>Limit price
+        <input id="tLimit" type="number" min="0" step="0.01"></label>
+      <label class="check" id="tBrWrap"><input type="checkbox" id="tBracket"> Attach take-profit / stop-loss</label>
+      <div class="bracket" id="tBrFields" hidden>
+        <label class="field">Take-profit (limit) <input id="tTP" type="number" min="0" step="0.01"></label>
+        <label class="field">Stop-loss (stop) <input id="tSL" type="number" min="0" step="0.01"></label>
+      </div>
+      <label class="field">Time in force
+        <select id="tTif"><option value="DAY">Day</option><option value="GTC">Good 'til cancelled</option></select></label>
+      <div class="est mono"><span id="tEstLabel">Est. cost</span><b id="tEst">–</b></div>
+      <div class="muted small" id="tNote"></div>
+      <button class="btn primary block" id="tReview">Review order</button>
+      <div class="confirm" id="tConfirm" hidden>
+        <div id="tSummary"></div>
+        <div class="row"><button class="btn" id="tBack">Edit</button><button class="btn primary" id="tSubmit">Place paper order</button></div>
+      </div>
+      <div class="msg" id="tMsg" hidden></div>
+    </div>
+
+    <div class="card acct">
+      <h3>Account</h3>
+      <dl class="mono" id="acctDl"></dl>
+      <button class="btn sm ghost" id="resetBtn">Reset account…</button>
+    </div>
+    <p class="disclaimer">Shadow Book is a paper-trading simulator. Market data comes from your own Public.com API key; no orders are ever sent to Public. Chart by TradingView. Not affiliated with or endorsed by Public.com.</p>
+  </aside>
+</main>
+<div id="toast" class="toast" hidden></div>
+<script src="/static/app.js"></script>
+<script src="/static/strategies.js"></script>
+<script src="/static/home.js"></script>
+<script src="/static/agents.js"></script>
+</body>
+</html>

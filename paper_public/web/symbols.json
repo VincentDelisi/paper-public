@@ -1,0 +1,534 @@
+[
+{
+"symbol": "SPY",
+"name": "SPDR S&P 500 ETF"
+},
+{
+"symbol": "QQQ",
+"name": "Invesco QQQ (Nasdaq-100)"
+},
+{
+"symbol": "IWM",
+"name": "iShares Russell 2000 ETF"
+},
+{
+"symbol": "DIA",
+"name": "SPDR Dow Jones ETF"
+},
+{
+"symbol": "VOO",
+"name": "Vanguard S&P 500 ETF"
+},
+{
+"symbol": "TLT",
+"name": "iShares 20+ Yr Treasury ETF"
+},
+{
+"symbol": "GLD",
+"name": "SPDR Gold Shares"
+},
+{
+"symbol": "SLV",
+"name": "iShares Silver Trust"
+},
+{
+"symbol": "USO",
+"name": "United States Oil Fund"
+},
+{
+"symbol": "XLF",
+"name": "Financial Select Sector SPDR"
+},
+{
+"symbol": "XLE",
+"name": "Energy Select Sector SPDR"
+},
+{
+"symbol": "XLK",
+"name": "Technology Select Sector SPDR"
+},
+{
+"symbol": "XLV",
+"name": "Health Care Select Sector SPDR"
+},
+{
+"symbol": "XLI",
+"name": "Industrial Select Sector SPDR"
+},
+{
+"symbol": "XLY",
+"name": "Consumer Discretionary SPDR"
+},
+{
+"symbol": "XLP",
+"name": "Consumer Staples SPDR"
+},
+{
+"symbol": "XLU",
+"name": "Utilities Select Sector SPDR"
+},
+{
+"symbol": "SMH",
+"name": "VanEck Semiconductor ETF"
+},
+{
+"symbol": "SOXL",
+"name": "Direxion Semiconductor Bull 3X"
+},
+{
+"symbol": "TQQQ",
+"name": "ProShares UltraPro QQQ"
+},
+{
+"symbol": "SQQQ",
+"name": "ProShares UltraPro Short QQQ"
+},
+{
+"symbol": "UVXY",
+"name": "ProShares Ultra VIX Short-Term"
+},
+{
+"symbol": "ARKK",
+"name": "ARK Innovation ETF"
+},
+{
+"symbol": "EEM",
+"name": "iShares MSCI Emerging Markets"
+},
+{
+"symbol": "FXI",
+"name": "iShares China Large-Cap"
+},
+{
+"symbol": "HYG",
+"name": "iShares High Yield Corporate Bond"
+},
+{
+"symbol": "KRE",
+"name": "SPDR S&P Regional Banking"
+},
+{
+"symbol": "XBI",
+"name": "SPDR S&P Biotech"
+},
+{
+"symbol": "AAPL",
+"name": "Apple"
+},
+{
+"symbol": "MSFT",
+"name": "Microsoft"
+},
+{
+"symbol": "NVDA",
+"name": "NVIDIA"
+},
+{
+"symbol": "AMZN",
+"name": "Amazon"
+},
+{
+"symbol": "GOOGL",
+"name": "Alphabet Class A"
+},
+{
+"symbol": "GOOG",
+"name": "Alphabet Class C"
+},
+{
+"symbol": "META",
+"name": "Meta Platforms"
+},
+{
+"symbol": "TSLA",
+"name": "Tesla"
+},
+{
+"symbol": "AVGO",
+"name": "Broadcom"
+},
+{
+"symbol": "AMD",
+"name": "Advanced Micro Devices"
+},
+{
+"symbol": "NFLX",
+"name": "Netflix"
+},
+{
+"symbol": "ORCL",
+"name": "Oracle"
+},
+{
+"symbol": "CRM",
+"name": "Salesforce"
+},
+{
+"symbol": "ADBE",
+"name": "Adobe"
+},
+{
+"symbol": "INTC",
+"name": "Intel"
+},
+{
+"symbol": "QCOM",
+"name": "Qualcomm"
+},
+{
+"symbol": "MU",
+"name": "Micron Technology"
+},
+{
+"symbol": "TSM",
+"name": "Taiwan Semiconductor"
+},
+{
+"symbol": "ARM",
+"name": "Arm Holdings"
+},
+{
+"symbol": "SMCI",
+"name": "Super Micro Computer"
+},
+{
+"symbol": "PLTR",
+"name": "Palantir"
+},
+{
+"symbol": "SNOW",
+"name": "Snowflake"
+},
+{
+"symbol": "CRWD",
+"name": "CrowdStrike"
+},
+{
+"symbol": "PANW",
+"name": "Palo Alto Networks"
+},
+{
+"symbol": "NOW",
+"name": "ServiceNow"
+},
+{
+"symbol": "SHOP",
+"name": "Shopify"
+},
+{
+"symbol": "UBER",
+"name": "Uber"
+},
+{
+"symbol": "ABNB",
+"name": "Airbnb"
+},
+{
+"symbol": "DASH",
+"name": "DoorDash"
+},
+{
+"symbol": "COIN",
+"name": "Coinbase"
+},
+{
+"symbol": "HOOD",
+"name": "Robinhood"
+},
+{
+"symbol": "SOFI",
+"name": "SoFi Technologies"
+},
+{
+"symbol": "PYPL",
+"name": "PayPal"
+},
+{
+"symbol": "SQ",
+"name": "Block"
+},
+{
+"symbol": "V",
+"name": "Visa"
+},
+{
+"symbol": "MA",
+"name": "Mastercard"
+},
+{
+"symbol": "JPM",
+"name": "JPMorgan Chase"
+},
+{
+"symbol": "BAC",
+"name": "Bank of America"
+},
+{
+"symbol": "WFC",
+"name": "Wells Fargo"
+},
+{
+"symbol": "C",
+"name": "Citigroup"
+},
+{
+"symbol": "GS",
+"name": "Goldman Sachs"
+},
+{
+"symbol": "MS",
+"name": "Morgan Stanley"
+},
+{
+"symbol": "SCHW",
+"name": "Charles Schwab"
+},
+{
+"symbol": "BRK.B",
+"name": "Berkshire Hathaway"
+},
+{
+"symbol": "UNH",
+"name": "UnitedHealth"
+},
+{
+"symbol": "LLY",
+"name": "Eli Lilly"
+},
+{
+"symbol": "JNJ",
+"name": "Johnson & Johnson"
+},
+{
+"symbol": "PFE",
+"name": "Pfizer"
+},
+{
+"symbol": "MRK",
+"name": "Merck"
+},
+{
+"symbol": "ABBV",
+"name": "AbbVie"
+},
+{
+"symbol": "MRNA",
+"name": "Moderna"
+},
+{
+"symbol": "NVO",
+"name": "Novo Nordisk"
+},
+{
+"symbol": "HD",
+"name": "Home Depot"
+},
+{
+"symbol": "LOW",
+"name": "Lowe's"
+},
+{
+"symbol": "WMT",
+"name": "Walmart"
+},
+{
+"symbol": "COST",
+"name": "Costco"
+},
+{
+"symbol": "TGT",
+"name": "Target"
+},
+{
+"symbol": "NKE",
+"name": "Nike"
+},
+{
+"symbol": "SBUX",
+"name": "Starbucks"
+},
+{
+"symbol": "MCD",
+"name": "McDonald's"
+},
+{
+"symbol": "KO",
+"name": "Coca-Cola"
+},
+{
+"symbol": "PEP",
+"name": "PepsiCo"
+},
+{
+"symbol": "DIS",
+"name": "Disney"
+},
+{
+"symbol": "BA",
+"name": "Boeing"
+},
+{
+"symbol": "CAT",
+"name": "Caterpillar"
+},
+{
+"symbol": "DE",
+"name": "Deere"
+},
+{
+"symbol": "GE",
+"name": "GE Aerospace"
+},
+{
+"symbol": "LMT",
+"name": "Lockheed Martin"
+},
+{
+"symbol": "RTX",
+"name": "RTX"
+},
+{
+"symbol": "XOM",
+"name": "Exxon Mobil"
+},
+{
+"symbol": "CVX",
+"name": "Chevron"
+},
+{
+"symbol": "OXY",
+"name": "Occidental Petroleum"
+},
+{
+"symbol": "COP",
+"name": "ConocoPhillips"
+},
+{
+"symbol": "F",
+"name": "Ford"
+},
+{
+"symbol": "GM",
+"name": "General Motors"
+},
+{
+"symbol": "RIVN",
+"name": "Rivian"
+},
+{
+"symbol": "LCID",
+"name": "Lucid"
+},
+{
+"symbol": "NIO",
+"name": "NIO"
+},
+{
+"symbol": "BABA",
+"name": "Alibaba"
+},
+{
+"symbol": "PDD",
+"name": "PDD Holdings"
+},
+{
+"symbol": "JD",
+"name": "JD.com"
+},
+{
+"symbol": "MSTR",
+"name": "MicroStrategy"
+},
+{
+"symbol": "MARA",
+"name": "MARA Holdings"
+},
+{
+"symbol": "RIOT",
+"name": "Riot Platforms"
+},
+{
+"symbol": "RDDT",
+"name": "Reddit"
+},
+{
+"symbol": "RKLB",
+"name": "Rocket Lab"
+},
+{
+"symbol": "IONQ",
+"name": "IonQ"
+},
+{
+"symbol": "CRWV",
+"name": "CoreWeave"
+},
+{
+"symbol": "DELL",
+"name": "Dell"
+},
+{
+"symbol": "IBM",
+"name": "IBM"
+},
+{
+"symbol": "CSCO",
+"name": "Cisco"
+},
+{
+"symbol": "T",
+"name": "AT&T"
+},
+{
+"symbol": "VZ",
+"name": "Verizon"
+},
+{
+"symbol": "TMUS",
+"name": "T-Mobile"
+},
+{
+"symbol": "SPOT",
+"name": "Spotify"
+},
+{
+"symbol": "ROKU",
+"name": "Roku"
+},
+{
+"symbol": "DKNG",
+"name": "DraftKings"
+},
+{
+"symbol": "GME",
+"name": "GameStop"
+},
+{
+"symbol": "AMC",
+"name": "AMC Entertainment"
+},
+{
+"symbol": "CVNA",
+"name": "Carvana"
+},
+{
+"symbol": "CEG",
+"name": "Constellation Energy"
+},
+{
+"symbol": "VST",
+"name": "Vistra"
+},
+{
+"symbol": "NEE",
+"name": "NextEra Energy"
+},
+{
+"symbol": "ENPH",
+"name": "Enphase"
+},
+{
+"symbol": "FSLR",
+"name": "First Solar"
+}
+]
